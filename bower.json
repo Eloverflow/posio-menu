@@ -1,0 +1,23 @@
+{
+  "name": "posio-menu",
+  "description": "POSIO Menu",
+  "version": "1.0.0",
+  "homepage": "https://github.com/jfortin-moreau/posio-menu",
+  "license": "",
+  "directory" : "src/app/bower_components",
+  "dependencies": {
+    "jquery": "*",
+    "jquery-ui": "*",
+    "compass-sass-mixins": "*",
+    "angular-route": "*",
+    "angular": "^1.5.8",
+    "angular-mocks": "^1.5.8",
+    "bootstrap-sass-official": "*",
+    "bootstrap-sass": "*",
+    "bootstrap": "*",
+    "angular-translate-loader-static-files": "*",
+    "angular-translate": "*",
+    "please-wait": "*"
+  },
+  "private": true
+}

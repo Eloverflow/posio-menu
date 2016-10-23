@@ -1,0 +1,11 @@
+{
+  "name": "jfortin-moreau/posio-menu",
+  "version": "1.0.1",
+  "keywords": ["mirageflow", "angular", "template", "javascript"],
+  "description": "POSIO Menu",
+  "license": "",
+  "dist": {
+    "url": "https://github.com/jfortin-moreau/posio-menu/archive/master.zip",
+    "type": "zip"
+  }
+}

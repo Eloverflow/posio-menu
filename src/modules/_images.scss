@@ -1,0 +1,22 @@
+//
+// Responsive Images
+// If you want to force the images to be full width
+// do this:
+//
+//  img {
+//      @include fluidimage(forceWidth);
+//  }
+//
+@mixin fluidimage($force-width: false) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  @if $force-width == forceWidth {
+    width: 100%;
+  } @else {
+    width: auto;
+  }
+}

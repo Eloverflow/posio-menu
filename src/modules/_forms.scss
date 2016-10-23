@@ -1,0 +1,12 @@
+// Form inputs mixin
+@mixin allinputs {
+  $inputs: password, text, search, tel, date, datetime, number, email, week;
+  @each $input in $inputs {
+    input[type="#{$input}"] {
+      @content;
+    }
+  }
+  textarea {
+    @content;
+  }
+}

@@ -1,0 +1,9 @@
+.tmp/
+coverage/
+dist/
+node_modules/
+jspm_packages/
+bower_components/
+.idea
+api_dev/.env
+src/app/lib/
