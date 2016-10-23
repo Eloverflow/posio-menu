@@ -1,4 +1,4 @@
-var posioMenuApp =  angular.module('starter', ['starter.templates', 'starter.controllers', 'starter.services', 'starter.constants','ui.bootstrap', 'ngIdle']);
+var posioMenuApp =  angular.module('starter', ['starter.templates', 'starter.controllers', 'starter.services', 'starter.constants','ui.bootstrap', 'ngIdle', 'pascalprecht.translate']);
 
 posioMenuApp.config(function ($interpolateProvider, uibPaginationConfig, IdleProvider, KeepaliveProvider, $rootScopeProvider) {
   $interpolateProvider.startSymbol('<%');
