@@ -1,5 +1,0 @@
-<modal title="Role sur le planché" id="choseWorkTitle" class="center-modal employee-work-title-modal" visible="showWorkTitlesModal">
-    <div ng-repeat="workTitle in workTitles">
-        <a ng-click="setWorkTitle(workTitle)" id="btn-<%workTitle.name%>" ng-show="(workTitle.cntEmployees | filter : {idEmployee: mainText}).length > 0" class="btn btn-success"><% workTitle.name %></a>
-    </div>
-</modal>

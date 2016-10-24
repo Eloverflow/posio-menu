@@ -47,18 +47,6 @@
 
 <ng-include src="'templates/menu/navbarHeader.html'">
 </ng-include>
-<ng-include src="'templates/menu/modal/selectTable.html'">
-</ng-include>
-<ng-include src="'templates/menu/modal/divideBill.html'">
-</ng-include>
-<ng-include src="'templates/menu/modal/existingBill.html'">
-</ng-include>
-<ng-include src="'templates/menu/modal/commandService.html'">
-</ng-include>
-<ng-include src="'templates/menu/modal/changeEmployee.html'">
-</ng-include>
-<ng-include src="'templates/menu/modal/workTitle.html'">
-</ng-include>
 <div id="splashFullScreen">Maintenant en mode plein écran.</div>
 
 <div id="sidebar-collapse" class="col-sm-5 sidebar">
@@ -109,5 +97,116 @@
     </ng-include>
 
 </div>
+
+<modal title="Selectionne une table" visible="showTableModal">
+    <div ng-repeat="n in [] | floor:plan.nbFloor" >
+        <span class="floor">Étage <% n+1 %></span>
+        <div ng-repeat="i in plan.table | filter:{noFloor: n}">
+            <button type="button" class="btn btn-success btn-table status<% i.status %>" ng-click="changeTable(i)" >Table #<% i.tblNumber %></button>
+        </div>
+    </div>
+</modal>
+
+<modal title="Changement d'employee" id="changeEmployee" class="center-modal employee-modal" visible="showEmployeeModal">
+    <div>
+        <span ng-click="changeEmployeeStepBack()" ng-show="validation" style="margin: 10px 0 0 20px ; cursor:pointer; padding: 10px; background-color: #444; border-radius: 50%; font-size: 25px; float: left; color: #fff; position: absolute" class='glyphicon glyphicon-arrow-left'></span>
+        <a ng-show="!validation" href="/"><span id="quit-emplye-modal" class='glyphicon glyphicon-remove-sign'></span></a>
+        <div style="width: 100%; text-align: center; padding-top: 10px"><span style="color: red; font-size: 15px;"><% numPadErrMsg %></span></div>
+        <table id="keyboard">
+            <tbody>
+            <tr id="rowTitle">
+                <td colspan="4" id="displayTitle"><% numPadMsg %></td>
+            </tr>
+            <tr>
+                <td colspan="4" id="displayMessage">
+                    <input type="text" name="employeeInput" ng-model="employeeInput" class="form-control" id="employeeInput">
+                    <em style="color: white; font-size: 18px;">Utilisez : 3 : 11</em>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2"><a class="btn button" ng-mousedown="padClick('dl')">Del</a></td>
+                <td colspan="2"><a class="btn button" ng-mousedown="padClick('cl')">Clear</a></td>
+            </tr>
+
+            <tr>
+                <td><a class="btn button" ng-mousedown="padClick(7)">7</a></td>
+                <td><a class="btn button" ng-mousedown="padClick(8)">8</a></td>
+                <td><a class="btn button" ng-mousedown="padClick(9)">9</a></td>
+                <td rowspan="2"><a id="btn-menu-clk" class="btn button" ng-click="padClick('clk')">Clock in/out</a></td>
+            </tr>
+
+            <tr>
+                <td><a class="btn button" ng-mousedown="padClick(4)">4</a></td>
+                <td><a class="btn button" ng-mousedown="padClick(5)">5</a></td>
+                <td><a class="btn button" ng-mousedown="padClick(6)">6</a></td>
+            </tr>
+
+            <tr>
+                <td><a id="btn-menu-1" class="btn button" ng-mousedown="padClick(1)">1</a></td>
+                <td><a class="btn button" ng-mousedown="padClick(2)">2</a></td>
+                <td><a id="btn-menu-3" class="btn button" ng-mousedown="padClick(3)">3</a></td>
+                <td rowspan="2"><a id="btn-menu-enter" class="btn button" ng-mousedown="padClick('ent')">Ent</a></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><a class="btn button" ng-mousedown="padClick(0)">0</a></td>
+                <td><a class="btn button" ng-mousedown="padClick('pt')">.</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</modal>
+
+<modal title="Associer ligne de commande a un service" class="center-modal" visible="showPanelCommandLineService">
+    Command Line Service #
+    <button class="btn btn-primary" ng-click="addToServiceNumber(1)">#1</button>
+    <button class="btn btn-primary" ng-click="addToServiceNumber(2)">#2</button>
+    <button class="btn btn-primary" ng-click="addToServiceNumber(3)">#3</button>
+    <button class="btn btn-primary" ng-click="addToServiceNumber(4)">#4</button>
+    <button class="btn btn-primary" ng-click="addToServiceNumber(5)">#5</button>
+    Associer un temps
+</modal>
+
+<modal title="Diviser Factures" class="center-modal" visible="showDivideBillModal">
+    <div class="divideBillChoices" >
+        <div ng-click="perClientBill()" class="divideBillChoice">
+            Une Facture par Personne
+        </div>
+        <div ng-click="oneBill()" class="divideBillChoice">
+            Une Seule Facture
+        </div>
+
+        <div  ng-click="manualBill()" class="divideBillChoice">
+            Diviser manuellement
+        </div>
+    </div>
+</modal>
+
+<modal title="Factures existantes" class="center-modal" visible="showPanelOverwriteBill">
+    <div class="divideBillChoices" >
+        <div ng-click="redivideBill()" class="divideBillChoice">
+            Rediviser les factures
+        </div>
+        <div ng-click="togglePanelOverwriteBill();openBill();" class="divideBillChoice">
+            Voir les factures
+        </div>
+    </div>
+</modal>
+
+<modal title="Selectionne une table" visible="showTableModal">
+    <div ng-repeat="n in [] | floor:plan.nbFloor" >
+        <span class="floor">Étage <% n+1 %></span>
+        <div ng-repeat="i in plan.table | filter:{noFloor: n}">
+            <button type="button" class="btn btn-success btn-table status<% i.status %>" ng-click="changeTable(i)" >Table #<% i.tblNumber %></button>
+        </div>
+    </div>
+</modal>
+
+<modal title="Role sur le planché" id="choseWorkTitle" class="center-modal employee-work-title-modal" visible="showWorkTitlesModal">
+    <div ng-repeat="workTitle in workTitles">
+        <a ng-click="setWorkTitle(workTitle)" id="btn-<%workTitle.name%>" ng-show="(workTitle.cntEmployees | filter : {idEmployee: mainText}).length > 0" class="btn btn-success"><% workTitle.name %></a>
+    </div>
+</modal>
 </body>
 </html>

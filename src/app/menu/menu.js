@@ -10,7 +10,6 @@ angular.module('starter.controllers')
             myBillScroll = new iScroll('filter-wrapper-bill', {
                 hideScrollbar: true
             });
-
         })
 
 
