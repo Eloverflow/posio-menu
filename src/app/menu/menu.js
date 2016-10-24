@@ -1,5 +1,18 @@
 angular.module('starter.controllers')
     .controller('menuController', function ($scope, getReq, postReq, $log, $filter, $timeout, Idle) {
+        $( document ).ready(function() {
+
+            var myScroll,myBillScroll;
+            myScroll = new iScroll('filter-wrapper', {
+                hideScrollbar: true
+            });
+
+            myBillScroll = new iScroll('filter-wrapper-bill', {
+                hideScrollbar: true
+            });
+
+        })
+
 
         /*Initializing variables*/
         $scope.commandline = [];
@@ -65,7 +78,7 @@ angular.module('starter.controllers')
         //
         $scope.noteDynamicPopover = {
             content: '',
-            templateUrl: 'notePopover.html',
+            templateUrl: 'templates/menu/notePopover.html',
             title: 'Notes sur la commande'
         }; //Popover when adding note to an item inside a command
 
@@ -118,6 +131,9 @@ angular.module('starter.controllers')
         //
         var employeeInput = $('#employeeInput');
         /*End of Initializing variables*/
+
+
+
 
         /*When the user become idle*/
         $scope.$on('IdleStart', function () {
@@ -502,7 +518,7 @@ angular.module('starter.controllers')
         };
 
         /*Start loading element*/
-        var $url = 'http://pos.mirageflow.com/itemtypes/list';
+        var $url = 'http://pos.mirageflow.com/api/itemtypes/list';
         var $callbackFunction = function (response) {
 
             console.log("Itemtype list received inside response");
@@ -510,7 +526,7 @@ angular.module('starter.controllers')
             $scope.menuItemTypes = response;
 
 
-            $url = 'http://pos.mirageflow.com/items/liste';
+            $url = 'http://pos.mirageflow.com/api/items/liste';
             var $callbackFunction = function (response) {
 
                 console.log("Item list received inside response");
@@ -684,7 +700,7 @@ angular.module('starter.controllers')
                 modalChangeEmployee.find('#closeModal').hide();
 
 
-                var $url = 'http://pos.mirageflow.com/extras/list';
+                var $url = 'http://pos.mirageflow.com/api/extras/list';
                 var $callbackFunctionExtraList = function (response) {
 
                     console.log("Extra list received inside response");
@@ -695,7 +711,7 @@ angular.module('starter.controllers')
 
                 getReq.send($url, null, $callbackFunctionExtraList);
 
-                $url = 'http://pos.mirageflow.com/filters/list';
+                $url = 'http://pos.mirageflow.com/api/filters/list';
                 var $callbackFunctionFilterList = function (response) {
 
                     console.log("Filters list received inside response");
@@ -720,7 +736,7 @@ angular.module('starter.controllers')
         
         $scope.getWorkTitle = function () {
 
-            $url = 'http://pos.mirageflow.com/work/titles/list';
+            $url = 'http://pos.mirageflow.com/api/work/titles/list';
             var $callbackFunctionFilterList = function (response) {
 
                 console.log("Work title list received inside response");
@@ -1424,7 +1440,7 @@ angular.module('starter.controllers')
         $scope.updateTable = function ($updateTableCallBack) {
 
 
-            var $url = 'http://pos.mirageflow.com/menu/command';
+            var $url = 'http://pos.mirageflow.com/api/menu/command';
 
             var $data = {
                 commands: $scope.commandClient,
@@ -1473,7 +1489,7 @@ angular.module('starter.controllers')
         $scope.updateBills = function ($updateTableCallBack) {
 
 
-            $url = 'http://pos.mirageflow.com/menu/bill';
+            $url = 'http://pos.mirageflow.com/api/menu/bill';
 
             $data = {
                 bills: $scope.bills,
@@ -1528,7 +1544,7 @@ angular.module('starter.controllers')
         $scope.deleteCommandsBills = function ($callBack) {
 
 
-            var $url = 'http://pos.mirageflow.com/menu/delete/bill';
+            var $url = 'http://pos.mirageflow.com/api/menu/delete/bill';
 
             var $data = {
                 bills: $scope.bills,
@@ -1696,7 +1712,7 @@ angular.module('starter.controllers')
                     $scope.commandsId.push($scope.commandClient[h + 1].id)
             }
 
-            var $url = 'http://pos.mirageflow.com/menu/getBills';
+            var $url = 'http://pos.mirageflow.com/api/menu/getBills';
             var $data = {commandsId: $scope.commandsId};
 
             var $callbackFunction = function (response) {
@@ -1798,7 +1814,7 @@ angular.module('starter.controllers')
         $scope.authenticateEmployee = function () {
 
             if ($scope.newUserId != null) {
-                var $url = 'http://pos.mirageflow.com/employee/authenticate/' + $scope.newUserId;
+                var $url = 'http://pos.mirageflow.com/api/employee/authenticate/' + $scope.newUserId;
                 var $data = {password: $scope.newUserPassword};
 
                 var $callbackFunction = function (response) {
@@ -2480,7 +2496,7 @@ angular.module('starter.controllers')
 
         /*Send a request to get the commands for the current table*/
         $scope.getCommand = function () {
-            $url = 'http://pos.mirageflow.com/menu/getCommand';
+            $url = 'http://pos.mirageflow.com/api/menu/getCommand';
             $data = {
                 table: $scope.currentTable,
                 employee: $scope.currentEmploye
@@ -2844,7 +2860,7 @@ angular.module('starter.controllers')
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
             $.ajax({
-                url: '/employee/punch',
+                url: 'http://pos.mirageflow.com/api/employee/punch',
                 type: 'POST',
                 data: {
                     _token: CSRF_TOKEN,
@@ -2869,7 +2885,36 @@ angular.module('starter.controllers')
                     }
                 }
             });
+
+
+        }
+
+        function getErrorMessage($message)
+        {
+            return '<div class=\"no-marg alert bg-danger\" role=\"alert\">' +
+                '<svg class=\"glyph stroked cancel\">' +
+                '<use xlink:href=\"#stroked-cancel\"></use>' +
+                '</svg>' +
+                $message +
+                '<a href=\"#\" data-dismiss=\"alert\" aria-label=\"close\" class=\"pull-right close\">' +
+                '<span class=\"glyphicon glyphicon-remove\"></span>' +
+                '</a>' +
+                '</div>';
         }
 
 
+        function getSuccessMessage($message)
+        {
+            return '<div class=\"no-marg alert bg-success\" role=\"alert\">' +
+                '<svg class=\"glyph stroked checkmark\">' +
+                '<use xlink:href=\"#stroked-checkmark\"></use>' +
+                '</svg>' +
+                $message +
+                '<a href=\"#\" data-dismiss=\"alert\" aria-label=\"close\" class=\"pull-right close\">' +
+                '<span class=\"glyphicon glyphicon-remove\"></span>' +
+                '</a>' +
+                '</div>';
+        }
+
     });
+

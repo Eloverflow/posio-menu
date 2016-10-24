@@ -60,7 +60,8 @@
 
 .sidebar{
 
-  background-color: #333;
+  background-color: #333!important;
+  padding: 0!important;
 }
 
 .sidebar h1,.sidebar h2, .sidebar h3{
@@ -315,9 +316,11 @@ div.saleTextZone input:focus{
   padding:0;
 }
 
+
 #filter-wrapper {
   position:absolute; z-index:1;
-  top:0; bottom:0; left:0;
+  top:0; bottom:0;
+  height: 80px;
   width:100%;
   background-color: rgba(0,0,0,0.9);
   overflow:hidden;
@@ -835,6 +838,7 @@ span.number{
 #sidebar-collapse{/*
 	height: 73%;*/
   padding-bottom: 20%;
+  z-index: 2;
 }
 
 
@@ -1263,6 +1267,7 @@ body{
 
 .navbar-header{
   height: 51px;
+  width: 100%;
 }
 
 .navbar-toggle{
@@ -1279,11 +1284,18 @@ body{
   padding-right: 0;
 }
 
+
+.div-filter{
+  padding: 0;
+  height: 80px;
+}
+
+/*.beer-items{
+  margin-top: 80px;
+}*/
+
+
 @media only screen and (min-width : 450px) {
-
-
-
-
 
   .bill-total{
     margin-top: 10px!important;
@@ -1306,7 +1318,6 @@ body{
   .div-filter{
     height: 82px;
     position: fixed;
-    padding: 0;
     z-index: 999;
   }/*
 	#keyboard{

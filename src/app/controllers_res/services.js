@@ -21,7 +21,7 @@ angular.module('starter.services', [])
                 if($callbackFunction)
                     $callbackFunction(response);
 
-            }).error(function (response,status) {
+            }).error(function (response) {
                 if(DEBUG.isEnabled){
                     console.log('Error: ');
                     console.log($url + ' -> Returned:');
@@ -31,13 +31,6 @@ angular.module('starter.services', [])
                 if($callbackFunction)
                     $callbackFunction(response);
 
-                if(status == 403){
-                    if(DEBUG.isEnabled) {
-                        console.log('Emptying the token and redirecting to login')
-                    }
-                    AuthService.logout();
-                    $location.path('/sign-in');
-                }
                 });
         }
     }

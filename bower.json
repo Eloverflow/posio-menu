@@ -14,12 +14,12 @@
     "angular": "^1.5.8",
     "angular-mocks": "^1.5.8",
     "angular-bootstrap": "*",
-    "bootstrap-sass-official": "*",
     "bootstrap-sass": "*",
     "bootstrap": "*",
     "angular-translate-loader-static-files": "*",
     "angular-translate": "*",
     "jquery.panzoom": "*",
+    "iscroll": "*",
     "please-wait": "*"
   },
   "private": true

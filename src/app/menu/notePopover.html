@@ -1,0 +1,54 @@
+<button class="btn btn-success" style="position: absolute; top:3px; right:3px; width: 90px; color: #00a5ff; background-color: #333;" ng-click="addServiceNumberToCommandline(commandItem)">Service <% commandItem.service_number %></button>
+
+<div class="form-group">
+    <label style="color: #000">Ajouter une note :</label>
+
+    <div class="input-group">
+        <input type="text" ng-model="noteDynamicPopover.note" placeholder="Note" class="form-control">
+
+        <div class="input-group-btn">
+            <button ng-click="addNote(noteDynamicPopover.note, commandItem)" type="button"
+                    class="btn btn-default" aria-label="Help"><span
+                    class="glyphicon glyphicon-plus"></span></button>
+        </div>
+    </div>
+</div>
+<div ng-repeat="suggestion in noteSuggestions">
+    <button type="button" class="btn btn-note"
+            ng-click="addNote(suggestion, commandItem)"><% suggestion %></button>
+</div>
+
+<div ng-show="(extras | filter : {items:{item :{id: commandItem.id}}}).length > 0 || (extras | filter : {itemtypes:{itemtype: {id: commandItem.item_type_id}}}).length > 0" class="suggestions" >
+    <div class="separation-extra" ></div>
+    Extras
+    <div ng-show="commandItem" ng-repeat="extra in extras | filter : {items:{item :{id: commandItem.id}}}">
+        <button ng-show="extra.effect == '+'"  type="button" class="btn btn-extra"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+        <button ng-show="extra.effect == '*'"  type="button" class="btn btn-extra pourcent"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+        <button ng-show="extra.effect == '-'" type="button" class="btn btn-extra negative"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+        <button ng-show="extra.effect == '/'" type="button" class="btn btn-extra negative pourcent"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+    </div>
+    <div ng-show="commandItem" ng-repeat="extra in extras | filter : {itemtypes:{itemtype: {id: commandItem.item_type_id}}}">
+        <button ng-show="extra.effect == '+'" type="button" class="btn btn-extra"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+        <button ng-show="extra.effect == '*'" type="button" class="btn btn-extra pourcent"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+        <button ng-show="extra.effect == '-'" type="button" class="btn btn-extra negative"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+        <button ng-show="extra.effect == '/'" type="button" class="btn btn-extra negative pourcent"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+    </div>
+    <div ng-hide="commandItem" ng-repeat="extra in extras | filter : {avail_for_command: 1}">
+        <button ng-show="extra.effect == '+'"  type="button" class="btn btn-extra"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+        <button ng-show="extra.effect == '*'"  type="button" class="btn btn-extra pourcent"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+        <button ng-show="extra.effect == '-'" type="button" class="btn btn-extra negative"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+        <button ng-show="extra.effect == '/'" type="button" class="btn btn-extra negative pourcent"
+                ng-click="addExtra(extra, commandItem)"><% extra.name %></button>
+    </div>
+</div>

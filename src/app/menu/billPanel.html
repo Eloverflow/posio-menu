@@ -1,0 +1,64 @@
+
+<div id="filter-wrapper-bill" style="overflow: hidden;">
+    <div class="bills-inner">
+        <div ng-repeat="bill in bills" class="bill" >
+
+            <span ng-show="bill.checked"  ng-click="checkBill(bill)" class="glyphicon glyphicon-check move-bill-check"></span>
+            <span ng-hide="bill.checked"  ng-click="checkBill(bill)" class="glyphicon glyphicon-unchecked move-bill-check"></span>
+            <h2 ng-show="!bill.unasociatedcommandline" style="color: white">Facture <% bill.number %></h2><h2 ng-hide="!bill.unasociatedcommandline" style="color: white"><% bill.number %></h2>
+            <ul>
+
+
+                <li ng-click="checkBillItem(commandItem)" ng-repeat="commandItem in bill" id="commandItem<% commandItem.id %>" class="sale-item">
+
+                    <span ng-show="commandItem.checked" class="glyphicon glyphicon-check move-bill-item-check"></span>
+                    <span ng-hide="commandItem.checked" class="glyphicon glyphicon-unchecked move-bill-item-check"></span>
+                    <div class="billTextZone">
+                        <span><%commandItem.quantity%></span> x
+                        <span ng-show="commandItem.size.name"> <% commandItem.size.name + " de " + commandItem.name%></span>
+                        <span ng-hide="commandItem.size.name" class="sale-item-name"> <% commandItem.size + " de " + commandItem.name%></span></div>
+                    <span class="" ng-hide="commandItem.cost">$ <%(commandItem.size.price*commandItem.quantity | number:2) %></span>
+                    <span class="" ng-show="commandItem.cost">$ <% (commandItem.cost*commandItem.quantity | number:2) %></span>
+
+                    <div ng-show="commandItem.notes.length != 0 || commandItem.extras.length != 0" class="itemNoteSeparation">
+                        <p ng-repeat="item in commandItem.notes track by $index"><% item.note %></p>
+                        <p ng-repeat="extra in commandItem.extras track by $index"><% extra.name %>
+                            <span ng-show="extra.effect == '+'" style="color: #8ad919; float: right; margin-right: 10px;"> + <% extra.value %>$ </span>
+                            <span ng-show="extra.effect == '-'" style="color: red; float: right; margin-right: 10px;"> - <% extra.value %>$ </span>
+                            <span ng-show="extra.effect == '*'" style="color: #8ad919; float: right; margin-right: 10px;"> + <% extra.value | number:0 %>% </span>
+                            <span ng-show="extra.effect == '/'" style="color: red; float: right; margin-right: 10px;"> - <% extra.value | number:0 %>% </span>
+                        </p>
+                    </div>
+                </li>
+
+                <li ng-click="toggleBillDemo()" ng-show="bill.total == 0 && !movingBillItem && !bill.unasociatedcommandline" class="add-bill-item">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </li>
+                <li style="text-align: center" ng-show="showBillDemo" ng-click="moveToBill(bill)">
+                    <span ng-show="bill.number != 1" style="float: left" class="glyphicon glyphicon-arrow-left"></span>
+                    <span ng-show="bill.number === bills.length" style=" font-size:30px; float: right" class="glyphicon glyphicon-arrow-up"></span>
+                    <span ng-hide="bill.number === bills.length" style=" float: right" class="glyphicon glyphicon-arrow-up"></span>
+                    <span style=" font-size:30px;" >Selectionnez !</span><br>
+                    <span style=" font-size:24px; color: #00a5ff" >Cliquez sur le bouton.</span>
+                </li>
+
+                <li ng-show="movingBillItem && !showBillDemo" ng-click="moveToBill(bill)" class="move-bill-item">
+                    <span class="glyphicon glyphicon-share"></span>
+                </li>
+                <li ng-show="showBillDemo " ng-click="moveToBill(bill)" class="move-bill-item">
+                    <span class="glyphicon glyphicon-share"></span> Deplacer ici
+                </li>
+                <li style="background-color: #8ad919" ng-click="toggleBillDemo()" ng-show="showBillDemo" class="add-bill-item">
+                    <span class="glyphicon glyphicon-remove-sign"></span> Annuler
+                </li>
+            </ul>
+            <div ng-show="bill.total > 0">
+                <h3>Sous-total : <span class="number"><% bill.subTotal | number:2 %></span></h3>
+                <h3 ng-repeat="taxe in bill.taxes"><% taxe.name %> : <span class="number"><% taxe.total | number:2 %></span></h3>
+                <h2>Total: <span class="number"><% bill.total | number:2 %></span></h2>
+                <span  ng-show="bill.length > 0" ng-click="chargeBill(bill)" class="glyphicon glyphicon-barcode charge-bill"></span>
+                <span  ng-show="bill.length > 0" ng-click="printBill(bill)" class="glyphicon glyphicon-print print-bill"></span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="div-bill-sub-total">
+    <h2>Sous-total : <span class="number"><% subTotalBill | number:2 %></span></h2><div class="right"><h3 ng-repeat="taxe in taxes"><% taxe.name %> : <span class="number"><% taxe.total | number:2 %></span></h3></div>
+    <div class="div-bill-total">
+        <h1 class="bill-total">Total : <span class="number"><% totalBill | number:2 %></span></h1>
+
+        <button ng-show="commandItemTimeToggle" href="#" ng-click="toggleCommandTime()"
+                style="background-color: #8ad919" type="button" class="btn btn-success"><span
+                class="glyphicon glyphicon-euro"></span>
+            Afficher le montant
+        </button>
+        <button ng-hide="commandItemTimeToggle" href="#" ng-click="toggleCommandTime()" type="button"
+                class="btn btn-success"><span class="glyphicon glyphicon-time"></span>
+            Afficher le temps
+        </button>
+
+    </div>
+    <div class="div-btn-facture">
+        <button ng-click="" type="button" class="btn btn-success btn-facture">Imprimer Factures</button>
+        <button ng-click="divideBill()" type="button" class="btn btn-success btn-facture">Diviser Factures</button>
+    </div>
+    <uib-progressbar class="progress-striped active" animate="true" max="100" value="progressValue" type="success">
+        <i><%savingMessage%></i>
+    </uib-progressbar>
+
+</div>
+

@@ -1,0 +1,30 @@
+<div class="row beer-items">
+    <div ng-repeat="menuItems in menuItemsExtended | filter:filters ">
+        <div ng-repeat="menuItemSize in menuItems.sizes" class="sizeBlock">
+            <div ng-repeat="menuItem in menuItems" class="col-sm-6 col-md-3">
+                <div
+                ng-click="selectedItem(menuItem,menuItemSize.name);addItem()" class="thumbnail beerItem"
+                style="background-color: <% menuItemSize.color.boxColor %>; ">
+                <div class="caption">
+                    <h3 style="color: <% menuItemSize.color.textColor %>"><span class="beerName"><% menuItemSize.name %>
+                                    de <% menuItem.name %></span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div ng-repeat="menuItems in filteredItems">
+        <div ng-repeat="menuItemSize in menuItems.sizes" class="sizeBlock">
+            <div ng-repeat="menuItem in menuItems" class="col-sm-6 col-md-3">
+                <div
+                ng-click="selectedItem(menuItem,menuItemSize.name);addItem()" class="thumbnail beerItem"
+                style="background-color: <% menuItemSize.color.boxColor %>; ">
+                    <div class="caption">
+                        <h3 style="color: <% menuItemSize.color.textColor %>"><span class="beerName"><% menuItemSize.name %>
+                                            de <% menuItem.name %></span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,61 +1,12 @@
-//
-// Base SCSS
-//
-// @author Daryn St. Pierre <daryn@bloqmail.com>
-// https://github.com/bloqhead/Base-SCSS
-//
-// This file does not try to contend with tools like
-// Bourbon and Neat. It simply adds things that I use
-// on a daily basis. Some of them are edge case.
-//
-// If you need something more involved, look into these:
-// * Bourbon [http://bourbon.io]
-// * Neat [http://neat.bourbon.io]
-//
-
-//
-// Variables and Settings
-//
-
-//
-// Bourbon and Neat
-// Set both to true if you want to use
-// the Neat grids module.
-//
-$bourbon:           true;
-$neat:              true;
-
-// Headings
-$headings:          'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6';
-
-// Form buttons
-$form-buttons:      'button, .button, .btn, input[type="submit"], input[type="reset"]';
-
-// Form inputs
-$inputs:            email, number, password, search, tel, text, url, color, date, datetime, datetime-local, month, time, week;
+$icon-font-path:  "/assets/fonts/bootstrap/"!default;
 
 
-//
-// Modules
-//
-@import 'modules/angler';
-@import 'modules/_breakpoints';
-@import 'modules/_flexmenu';
-@import 'modules/_forms';
-@import 'modules/_hamburger';
-@import 'modules/_icons';
-@import 'modules/_images';
-@import 'modules/_lists';
-@import 'modules/_pseudo-shift';
-@import 'modules/_responsive-type';
-@import 'modules/_type';
-@import 'modules/_utility';
+@function font-path($path) {
+  @return $path;
+}
 
-
-$icon-font-path:  "../assets/fonts/bootstrap"!default;
-@import "app/lib/bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
-@import "app/lib/bootstrap-sass-official/assets/stylesheets/bootstrap";
-@import "app/lib/compass-sass-mixins/lib/compass";
+@import "app/lib/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+@import "app/lib/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import 'modules/_posio-menu';
 

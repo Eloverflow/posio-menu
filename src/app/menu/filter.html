@@ -1,0 +1,12 @@
+<div id="filter-wrapper" style="overflow: hidden;">
+
+    <div class="menu-filter">
+        <button ng-click="removeFilters();filters.itemtype.type = ''" type="button" class="btn btn-default btn-primary"><span
+                class="glyphicon glyphicon-star"></span> Tout
+        </button>
+        <button ng-repeat="menuFilter in menuFilters | orderBy:'importance':true" ng-click="applyFilter(menuFilter)"
+                type="button" class="btn btn-primary"><% menuFilter.name %></button>
+        <button ng-repeat="itemType in menuItemTypes" ng-click="removeFilters();filters.itemtype.type = itemType.type"
+                type="button" class="btn btn-primary"><% itemType.type %></button>
+    </div>
+</div>
