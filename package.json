@@ -96,12 +96,11 @@
     "tiny-lr": "*",
     "watchify": "*",
     "webpack": "^1.13.1",
+    "http-server": "*",
     "webpack-split-by-path": "^0.0.10"
   },
   "scripts": {
-    "postinstall": "bower install",
-    "prestart": "npm install",
-    "start": "http-server -a localhost -p 8000 ./src/app",
+    "start": "http-server -a pos.mirageflow.com -p 8000 ./src/app",
     "pretest": "npm install",
     "test-single-run": "karma start karma.conf.js --single-run",
     "preupdate-webdriver": "npm install",
