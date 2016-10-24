@@ -9,6 +9,8 @@
     "jquery-ui": "*",
     "compass-sass-mixins": "*",
     "angular-route": "*",
+    "angular-touch": "*",
+    "angular-animate": "*",
     "angular-ui-router": "*",
     "ng-idle": "*",
     "angular": "^1.5.8",
