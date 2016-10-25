@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-    .controller('menuController', function ($scope, getReq, postReq, $log, $filter, $timeout, Idle) {
+    .controller('menuController', function ($scope, getReq, postReq, $log, $filter, $timeout, Idle, DEBUG) {
         $( document ).ready(function() {
 
             var myScroll,myBillScroll;
@@ -7,12 +7,12 @@ angular.module('starter.controllers')
                 hideScrollbar: true
             });
 
-            myBillScroll = new iScroll('filter-wrapper-bill', {
+          /*  myBillScroll = new iScroll('filter-wrapper-bill', {
                 hideScrollbar: true
-            });
+            });*/
         })
 
-
+        
         /*Initializing variables*/
         $scope.commandline = [];
         //
@@ -77,7 +77,7 @@ angular.module('starter.controllers')
         //
         $scope.noteDynamicPopover = {
             content: '',
-            templateUrl: 'templates/menu/notePopover.html',
+            templateUrl: 'templates/view_menu/notePopover.html',
             title: 'Notes sur la commande'
         }; //Popover when adding note to an item inside a command
 
@@ -133,39 +133,41 @@ angular.module('starter.controllers')
 
 
 
-
-        /*When the user become idle*/
-        $scope.$on('IdleStart', function () {
-            console.log('Idle');
-            if (!$scope.showEmployeeModal) {
-                $scope.changeEmployee();
-            }
-            pendingRequestAuthRequest = null;
-        });
-
-
-        /*User in idle before been kicked*/
-        $scope.$on('IdleWarn', function (e, countdown) {
-            if (countdown == 1) {
-                console.log('End if idle to trigger')
-            }
-        });
+        if(!DEBUG.isEnabled){
+            /*When the user become idle*/
+            $scope.$on('IdleStart', function () {
+                console.log('Idle');
+                if (!$scope.showEmployeeModal) {
+                    $scope.changeEmployee();
+                }
+                pendingRequestAuthRequest = null;
+            });
 
 
-        /*User idle has timeout, he is kicked*/
-        $scope.$on('IdleTimeout', function () {
-            console.log('IdleTimeout');
-            $scope.commandClient = [];
-            $scope.commandline = [];
-            /*$scope.bills = [];
-             $scope.taxe = [0, 0];
-             $scope.totalBill = 0;*/
-            $(windowModalBlockerHtml).hide().prependTo(modalChangeEmployee).fadeIn("fast");
+            /*User in idle before been kicked*/
+            $scope.$on('IdleWarn', function (e, countdown) {
+                if (countdown == 1) {
+                    console.log('End if idle to trigger')
+                }
+            });
 
-            modalChangeEmployee.find('#closeModal').hide();
 
-            Idle.watch();
-        });
+            /*User idle has timeout, he is kicked*/
+            $scope.$on('IdleTimeout', function () {
+                console.log('IdleTimeout');
+                $scope.commandClient = [];
+                $scope.commandline = [];
+                /*$scope.bills = [];
+                 $scope.taxe = [0, 0];
+                 $scope.totalBill = 0;*/
+                $(windowModalBlockerHtml).hide().prependTo(modalChangeEmployee).fadeIn("fast");
+
+                modalChangeEmployee.find('#closeModal').hide();
+
+                Idle.watch();
+            });
+        }
+
 
         /*Function to delete an item from the current command*/
         $scope.delete2 = function (item) {
@@ -190,7 +192,6 @@ angular.module('starter.controllers')
 
         /*Function to get the plan from database then display it*/
         $scope.getPlan = function () {
-            console.log('GetPlan');
             $url = 'http://pos.mirageflow.com/api/table-plan/1';
 
             /*What to do with the plan received*/
@@ -519,16 +520,11 @@ angular.module('starter.controllers')
         /*Start loading element*/
         var $url = 'http://pos.mirageflow.com/api/itemtypes/list';
         var $callbackFunction = function (response) {
-
-            console.log("Itemtype list received inside response");
-
             $scope.menuItemTypes = response;
 
 
             $url = 'http://pos.mirageflow.com/api/items/liste';
             var $callbackFunction = function (response) {
-
-                console.log("Item list received inside response");
 
                 $scope.menuItems = response;
 
@@ -702,8 +698,6 @@ angular.module('starter.controllers')
                 var $url = 'http://pos.mirageflow.com/api/extras/list';
                 var $callbackFunctionExtraList = function (response) {
 
-                    console.log("Extra list received inside response");
-
                     $scope.extras = response;
                 };
 
@@ -713,10 +707,7 @@ angular.module('starter.controllers')
                 $url = 'http://pos.mirageflow.com/api/filters/list';
                 var $callbackFunctionFilterList = function (response) {
 
-                    console.log("Filters list received inside response");
-
                     $scope.menuFilters = response;
-                    console.log(response)
                 };
 
 
@@ -738,10 +729,7 @@ angular.module('starter.controllers')
             $url = 'http://pos.mirageflow.com/api/work/titles/list';
             var $callbackFunctionFilterList = function (response) {
 
-                console.log("Work title list received inside response");
-
                 $scope.workTitles = response.workTitles;
-                console.log(response)
             };
 
 
@@ -1380,7 +1368,7 @@ angular.module('starter.controllers')
         /*
          $scope.payNow = function () {
 
-         $url = 'http://pos.mirageflow.com/menu/payer';
+         $url = 'http://pos.mirageflow.com/view_menu/payer';
          $data = $scope.commandClient[$scope.commandCurrentClient].commandline;
 
          var $callbackFunction = function(response){
@@ -1439,7 +1427,7 @@ angular.module('starter.controllers')
         $scope.updateTable = function ($updateTableCallBack) {
 
 
-            var $url = 'http://pos.mirageflow.com/api/menu/command';
+            var $url = 'http://pos.mirageflow.com/api/view_menu/command';
 
             var $data = {
                 commands: $scope.commandClient,
@@ -1488,7 +1476,7 @@ angular.module('starter.controllers')
         $scope.updateBills = function ($updateTableCallBack) {
 
 
-            $url = 'http://pos.mirageflow.com/api/menu/bill';
+            $url = 'http://pos.mirageflow.com/api/view_menu/bill';
 
             $data = {
                 bills: $scope.bills,
@@ -1543,7 +1531,7 @@ angular.module('starter.controllers')
         $scope.deleteCommandsBills = function ($callBack) {
 
 
-            var $url = 'http://pos.mirageflow.com/api/menu/delete/bill';
+            var $url = 'http://pos.mirageflow.com/api/view_menu/delete/bill';
 
             var $data = {
                 bills: $scope.bills,
@@ -1819,8 +1807,6 @@ angular.module('starter.controllers')
                 var $callbackFunction = function (response) {
 
                     if (!response.hasOwnProperty('error')) {
-                        console.log("User is valid :");
-                        console.log(response);
 
                         if (pendingRequestAuthRequest != null) {
                             pendingRequestAuthRequest();
@@ -1837,10 +1823,6 @@ angular.module('starter.controllers')
                         $scope.showEmployeeModal = false;
                     }
                     else {
-                        console.log("User is invalid :");
-                        console.log(response.error);
-
-
                         $scope.validation = false;
                         $scope.numPadMsg = msgEnterEmployeeNumber;
                         employeeInput.attr('type', 'text');
@@ -2505,9 +2487,6 @@ angular.module('starter.controllers')
              console.log($data);*/
 
             var $callbackFunction = function (response) {
-                console.log('GetCommand');
-                console.log(response);
-
 
                 $scope.commandCurrentClient = 1;
 
@@ -2639,8 +2618,6 @@ angular.module('starter.controllers')
                     $('.progress-bar').addClass('progress-bar-success');
                     $scope.savingMessage = "Pret!!!"
                 }, 0);
-
-                console.log("The command as been loaded and confirmation received inside response - Success or Not ?");
 
                 $scope.getBills();
 

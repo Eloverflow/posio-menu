@@ -14,20 +14,17 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-route/angular-route.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/jquery/dist/jquery.min.js',
-      'bower_components/tinymce-dist/tinymce.js',
-      'js/tinymce.js',
-      'bower_components/bootbox.js/bootbox.js',
+      'lib/angular/angular.js',
+      'lib/angular-route/angular-route.js',
+      'lib/angular-mocks/angular-mocks.js',
+      'lib/jquery/dist/jquery.min.js',
       'app.js',
       'controllers_res/starter.js',
       'controllers_res/constants.js',
       'controllers_res/services.js',
-      'view*/**/*.js',
-      'bower_components/openfb/openfb.js',
-      'bower_components/bootstrap/dist/js/bootstrap.min.js'
+      'controllers_res/directives.js',
+      'controllers_res/templates.js',
+      'view*/**/*.js'
     ],
 
 

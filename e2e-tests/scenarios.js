@@ -5,9 +5,9 @@
 describe('Blogproject', function() {
 
 
-    it('should automatically redirect to /view_posts when location hash/fragment is empty', function() {
+    it('should automatically not redirect...', function() {
         browser.get('index.html');
-        expect(browser.getLocationAbsUrl()).toMatch("/posts");
+        expect(browser.getLocationAbsUrl()).toMatch("/");
     });
 
   /*  describe('view_posts', function() {

@@ -5,15 +5,16 @@ describe('starter.controllers module', function() {
   beforeEach(module('starter.constants'));
   beforeEach(module('starter.services'));
   beforeEach(module('starter.controllers'));
+  beforeEach(module('starter.directives'));
+  beforeEach(module('starter.templates'));
 
-  describe('User controller', function(){
+  describe('Menu controller', function(){
 
     it('should ....', inject(function($controller) {
       //spec body
       var $scope = {};
-      var userCtrl = $controller('UserCtrl', {
-        $scope: $scope,
-        $routeParams: {id: '57e000b57772500ae3a0df6e'}
+      var userCtrl = $controller('menuController', {
+        $scope: $scope
       });
       expect(userCtrl).toBeDefined();
     }));
