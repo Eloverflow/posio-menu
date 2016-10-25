@@ -45,7 +45,7 @@
 </script>
 
 
-<ng-include src="'templates/view_menu/navbarHeader.html'">
+<ng-include src="'templates/view_menu/navbarHeader.html'" include-replace>
 </ng-include>
 <div id="splashFullScreen">Maintenant en mode plein écran.</div>
 
@@ -53,25 +53,27 @@
     <ul uib-pagination ng-change="pageChanged()" total-items="clientPagerTotalItems" ng ng-model="commandCurrentClient"
                     max-size="clientPagerMaxSize" class="pagination-sm" boundary-link-numbers="true"
                     rotate="false"></ul>
-    <ng-include src="'templates/view_menu/sidebar.html'">
+    <ng-include src="'templates/view_menu/sidebar.html'" include-replace>
     </ng-include>
 </div>
 <div id="sidebar-collapse2" class="col-sm-5 sidebar bill-bottom">
-    <ng-include src="'templates/view_menu/sidebarBill.html'">
+    <ng-include src="'templates/view_menu/sidebarBill.html'" include-replace>
     </ng-include>
 </div>
 <div class="col-sm-7 col-sm-offset-5  div-filter">
-    <ng-include src="'templates/view_menu/filter.html'">
+    <ng-include src="'templates/view_menu/filter.html'" include-replace>
     </ng-include>
 </div>
 
 <div id="contentPanel" class="col-sm-7 col-sm-offset-5">
-    <ng-include src="'templates/view_menu/contentPanel.html'">
+    <ng-include src="'templates/view_menu/contentPanel.html'" include-replace>
     </ng-include>
 </div>
 
-<ng-include src="'templates/view_menu/plan.html'">
-</ng-include>
+<div id="planModal" ng-show="showPlanModal">
+    <ng-include src="'templates/view_menu/plan.html'" include-replace>
+    </ng-include>
+</div>
 
 <div id="billWindow">
     <h1>Factures</h1>
@@ -86,14 +88,14 @@
             <i><%savingMessage%></i>
         </uib-progressbar>
     </div>
-    <ng-include src="'templates/view_menu/billPanel.html'">
+    <ng-include src="'templates/view_menu/billPanel.html'" include-replace>
     </ng-include>
     <div ng-show="showTerminateCommandInfo" style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1051; font-size: 22px!important;">
         <li class="terminate-command-info" >
             <span ng-repeat="info in terminateCommandInfo"><% info %><br></span>
         </li>
     </div>
-    <ng-include src="'templates/view_menu/billPaymentPanel.html'">
+    <ng-include src="'templates/view_menu/billPaymentPanel.html'" include-replace>
     </ng-include>
 
 </div>

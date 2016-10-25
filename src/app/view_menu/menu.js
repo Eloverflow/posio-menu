@@ -10,15 +10,47 @@ angular.module('starter.controllers')
           /*  myBillScroll = new iScroll('filter-wrapper-bill', {
                 hideScrollbar: true
             });*/
+
+
+            var $planSection = $('#planModal');
+            var $planPanzoom = $planSection.find('.panzoom').panzoom({$reset: $planSection.find("#planZoomout")});  // Initialize the panzoom
+            var planZoomout = $('#planZoomout');
+
+
+            /*Reset zoom status in the plan*/
+            $planSection.find("#planZoomout").on('click', function () {
+                $scope.totalIncrement = 1;
+            });
+
+            /*This is the listener for zoooming inside the plan, on double click*/
+            (function () {
+                $planPanzoom.parent().on('dblclick', function (e) {
+                    e.preventDefault();
+
+                    var offset = this.getClientRects()[0];
+
+                    /*Fix the margin error*/
+                    var eWithOffset = e;
+                    eWithOffset.clientX = (e.clientX - offset.left);
+                    eWithOffset.clientY = (e.clientY - offset.top) - 300;
+
+                    console.log(eWithOffset);
+
+                    $planPanzoom.panzoom('zoom', false, {
+                        increment: increment,
+                        focal: eWithOffset
+                    });
+
+                    /*Allow click to work by following the zoom effect on the Div*/
+                    $scope.totalIncrement += increment;
+                });
+            })();
         })
 
         
         /*Initializing variables*/
         $scope.commandline = [];
         //
-        var $planSection = $('#planModal');
-        var $planPanzoom = $planSection.find('.panzoom').panzoom({$reset: $planSection.find("#planZoomout")});  // Initialize the panzoom
-        var planZoomout = $('#planZoomout');
         var increment = 0.5; // Incrementation for the zoom in
         $scope.totalIncrement = 1; // Value for the zoom status
         //
@@ -229,34 +261,6 @@ angular.module('starter.controllers')
             $scope.planCanva();
         };
 
-        /*Reset zoom status in the plan*/
-        $planSection.find("#planZoomout").on('click', function () {
-            $scope.totalIncrement = 1;
-        });
-
-        /*This is the listener for zoooming inside the plan, on double click*/
-        (function () {
-            $planPanzoom.parent().on('dblclick', function (e) {
-                e.preventDefault();
-
-                var offset = this.getClientRects()[0];
-
-                /*Fix the margin error*/
-                var eWithOffset = e;
-                eWithOffset.clientX = (e.clientX - offset.left);
-                eWithOffset.clientY = (e.clientY - offset.top) - 300;
-
-                console.log(eWithOffset);
-
-                $planPanzoom.panzoom('zoom', false, {
-                    increment: increment,
-                    focal: eWithOffset
-                });
-
-                /*Allow click to work by following the zoom effect on the Div*/
-                $scope.totalIncrement += increment;
-            });
-        })();
 
         /*Will ultimatetly render the plan*/
         $scope.planCanva = function () {

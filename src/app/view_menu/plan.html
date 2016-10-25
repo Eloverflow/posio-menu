@@ -1,13 +1,12 @@
-<div id="planModal" ng-show="showPlanModal">
-    <span id="floorNumber" >Étage #<% plan.currentFloor+1 %></span>
-    <div class="planRightButton">
-        <span id="planZoomout" class="glyphicon glyphicon-zoom-out"></span>
-        <span ng-show="plan.currentFloor < plan.nbFloor-1"  ng-click="floorUp()"  id="floorup" class="glyphicon glyphicon-upload"></span>
-        <span ng-show="plan.currentFloor > 0" ng-click="floorDown()" id="floordown" class="glyphicon glyphicon-download"></span>
-    </div>
-    <div class="parent">
-        <div class="panzoom">
-            <canvas style="margin: 0;" id="planCanvas" width="0" height="0" />
-        </div>
+
+<span id="floorNumber" >Étage #<% plan.currentFloor+1 %></span>
+<div class="planRightButton">
+    <span id="planZoomout" class="glyphicon glyphicon-zoom-out"></span>
+    <span ng-show="plan.currentFloor < plan.nbFloor-1"  ng-click="floorUp()"  id="floorup" class="glyphicon glyphicon-upload"></span>
+    <span ng-show="plan.currentFloor > 0" ng-click="floorDown()" id="floordown" class="glyphicon glyphicon-download"></span>
+</div>
+<div class="parent">
+    <div class="panzoom">
+        <canvas style="margin: 0;" id="planCanvas" width="0" height="0" />
     </div>
 </div>
