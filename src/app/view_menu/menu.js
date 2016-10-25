@@ -1480,7 +1480,7 @@ angular.module('starter.controllers')
         $scope.updateBills = function ($updateTableCallBack) {
 
 
-            $url = 'http://pos.mirageflow.com/api/view_menu/bill';
+            $url = 'http://pos.mirageflow.com/api/menu/bill';
 
             $data = {
                 bills: $scope.bills,
@@ -1490,7 +1490,6 @@ angular.module('starter.controllers')
 
 
             var $callbackFunction = function (response) {
-                console.log('Updated bills');
                 if (typeof response.saleLineIdMat != 'undefined' && response.saleLineIdMat != null) {
                     for (var f = 0; f < response.saleLineIdMat.length; f++) {
 
@@ -1507,8 +1506,6 @@ angular.module('starter.controllers')
                     $('.progress-bar').addClass('progress-bar-success');
                     $scope.savingMessage = "Sauvegardé!"
                 }, 0);
-
-                console.log("The bill as been saved and confirmation received inside response - Success or Not ?");
 
                 if ($updateTableCallBack != null)
                     $updateTableCallBack();
@@ -1554,7 +1551,6 @@ angular.module('starter.controllers')
                     $scope.savingMessage = "Facture effacé!"
                 }, 0);
 
-                console.log("Facture effacé - Success or Not ?");
 
                 if ($callBack != null)
                     $callBack();
