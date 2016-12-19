@@ -9,7 +9,7 @@ angular.module('starter.services', [])
                 data: $data,
                 method: "POST",
                 crossDomain: true
-            }).success(function (response) {
+            }).then(function (response) {
                 if(DEBUG.isEnabled){
                     console.log($url + ' -> Returned:');
                     console.log(response);
@@ -21,7 +21,7 @@ angular.module('starter.services', [])
                 if($callbackFunction)
                     $callbackFunction(response);
 
-            }).error(function (response) {
+            },function (response) {
                 if(DEBUG.isEnabled){
                     console.log('Error: ');
                     console.log($url + ' -> Returned:');
@@ -44,7 +44,7 @@ angular.module('starter.services', [])
                     data: $data,
                     method: "PUT",
                     crossDomain: true
-                }).success(function (response) {
+                }).then(function (response) {
                     if(DEBUG.isEnabled){
                         console.log($url + ' -> Returned:');
                         console.log(response);
@@ -56,8 +56,7 @@ angular.module('starter.services', [])
                     if($callbackFunction)
                         $callbackFunction(response);
 
-                })
-                    .error(function (response,status) {
+                },function (response,status) {
                         if(DEBUG.isEnabled){
                             console.log('Error: ');
                             console.log($url + ' -> Returned:');
@@ -83,7 +82,7 @@ angular.module('starter.services', [])
                     method: "GET",
                     url: $url,
                     crossDomain: true
-                }).success(function (response) {
+                }).then(function (response) {
                     if(DEBUG.isEnabled){
                         console.log($url + ' -> Returned:');
                         console.log(response);
@@ -95,8 +94,7 @@ angular.module('starter.services', [])
                     if($callbackFunction)
                         $callbackFunction(response);
 
-                })
-                    .error(function (response) {
+                },function (response) {
                         if(DEBUG.isEnabled){
                             console.log('Error: ');
                             console.log($url + ' -> Returned:');
@@ -115,7 +113,7 @@ angular.module('starter.services', [])
                     url: $url,
                     method: "DELETE",
                     crossDomain: true
-                }).success(function (response) {
+                }).then(function (response) {
                     if(DEBUG.isEnabled){
                         console.log($url + ' -> Returned:');
                         console.log(response);
@@ -127,8 +125,7 @@ angular.module('starter.services', [])
                     if($callbackFunction)
                         $callbackFunction(response);
 
-                })
-                    .error(function (response, status) {
+                },function (response, status) {
                         if(DEBUG.isEnabled){
                             console.log('Error: ');
                             console.log($url + ' -> Returned:');

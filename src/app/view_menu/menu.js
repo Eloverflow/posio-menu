@@ -47,7 +47,7 @@ angular.module('starter.controllers')
             })();
         })
 
-        
+
         /*Initializing variables*/
         $scope.commandline = [];
         //
@@ -72,11 +72,12 @@ angular.module('starter.controllers')
             '<div class="pg-loading-inner">' +
             '<div class="pg-loading-center-outer">' +
             '<div style="padding-bottom:140px;vertical-align: bottom" class="pg-loading-center-middle">' +
-            '<img class="pg-loading-logo" src="http://pos.mirageflow.com/Framework/please-wait/posio.png">' +
+            '<img class="pg-loading-logo" src="img/posio.png">' +
             '</div>' +
             '</div>' +
             '</div>' +
             '</div>';
+
         //
         $scope.totalBill = 0; // Current command total (subtotal + taxes)
         //
