@@ -19,7 +19,7 @@ angular.module('starter.services', [])
                     $location.path($callbackPath);
 
                 if($callbackFunction)
-                    $callbackFunction(response);
+                    $callbackFunction(response.data);
 
             },function (response) {
                 if(DEBUG.isEnabled){
@@ -54,7 +54,7 @@ angular.module('starter.services', [])
                         $location.path($callbackPath);
 
                     if($callbackFunction)
-                        $callbackFunction(response);
+                        $callbackFunction(response.data);
 
                 },function (response,status) {
                         if(DEBUG.isEnabled){
@@ -92,7 +92,7 @@ angular.module('starter.services', [])
                         $location.path($callbackPath);
 
                     if($callbackFunction)
-                        $callbackFunction(response);
+                        $callbackFunction(response.data);
 
                 },function (response) {
                         if(DEBUG.isEnabled){
@@ -123,7 +123,7 @@ angular.module('starter.services', [])
                         $location.path($callbackPath);
 
                     if($callbackFunction)
-                        $callbackFunction(response);
+                        $callbackFunction(response.data);
 
                 },function (response, status) {
                         if(DEBUG.isEnabled){

@@ -1432,7 +1432,7 @@ angular.module('starter.controllers')
         $scope.updateTable = function ($updateTableCallBack) {
 
 
-            var $url = 'http://pos.mirageflow.com/api/view_menu/command';
+            var $url = 'http://pos.mirageflow.com/api/menu/command';
 
             var $data = {
                 commands: $scope.commandClient,
@@ -1533,7 +1533,7 @@ angular.module('starter.controllers')
         $scope.deleteCommandsBills = function ($callBack) {
 
 
-            var $url = 'http://pos.mirageflow.com/api/view_menu/delete/bill';
+            var $url = 'http://pos.mirageflow.com/api/menu/delete/bill';
 
             var $data = {
                 bills: $scope.bills,
